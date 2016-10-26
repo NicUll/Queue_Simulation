@@ -21,6 +21,19 @@ Fru Franco undrar hur länge hon kan räkna med att få jobba över en dag då m
 hon startar programmet och höjer antal ärenden per kund. Sedan startar hon simuleringen och ser när den sista kunden lämnar.
 
 ##Programskelett
+```python
 
+class office(object):
+  def __init__(self, times, time_per_customer):
+    """Create a post-office object with parameters for 
+    business-hours and the time it takes per customer"""
+
+
+class customer(object):
+  def __init__(self,):
+    self.name = "Kalle"
+
+
+```
 
 ##Programflöde och dataflöde
