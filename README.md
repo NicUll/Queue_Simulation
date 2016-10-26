@@ -26,7 +26,13 @@ hon startar programmet och höjer antal ärenden per kund. Sedan startar hon sim
 class office(object):
   def __init__(self, times, time_per_customer):
     """Create a post-office object with parameters for 
-    business-hours and the time it takes per customer"""
+    business-hours and the time it takes per customer.
+    A list is also initiated that will hold the customer queue."""
+    pass
+    
+  def add(self):
+    """Create a new random customer and add them to the queue"""
+    pass
 
 
 class customer(object):
