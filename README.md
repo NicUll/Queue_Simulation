@@ -23,21 +23,25 @@ hon startar programmet och höjer antal ärenden per kund. Sedan startar hon sim
 ##Programskelett
 ```python
 
-class office(object):
+class Office(object):
   def __init__(self, times, time_per_customer):
     """Create a post-office object with parameters for 
     business-hours and the time it takes per customer.
     A list is also initiated that will hold the customer queue."""
     pass
     
-  def add(self):
-    """Create a new random customer and add them to the queue"""
+  def add(self, in_time):
+    """Create a new random customer and add them to the queue."""
     pass
+    
+  def 
 
 
-class customer(object):
-  def __init__(self,):
-    self.name = "Kalle"
+class Customer(object):
+  def __init__(self, in_time):
+    """Create a new customer and randomize the amount of errand they have.
+    Store the time they entered the post-office."""
+    pass
 
 
 ```
