@@ -27,19 +27,24 @@ class Office(object):
   def __init__(self, times, time_per_customer):
     """Create a post-office object with parameters for 
     business-hours and the time it takes per customer.
-    A list is also initiated that will hold the customer queue."""
+    A list is also initiated that will hold the customer queue,
+    together with an index keeping track of current customer."""
     pass
     
-  def add(self, in_time):
-    """Create a new random customer and add them to the queue."""
+  def add_customer(self, customer):
+    """Add a customer to the queue.
+    Return their place in the queue"""
     pass
     
-  def 
+  def customer_done(self, out_time):
+    """Increase the customer queue index 
+    the last customer from the queue"""
+    pass
 
 
 class Customer(object):
-  def __init__(self, in_time):
-    """Create a new customer and randomize the amount of errand they have.
+  def __init__(self, in_time, errands):
+    """Create a new customer and randomize the amount of errands they have.
     Store the time they entered the post-office."""
     pass
 
