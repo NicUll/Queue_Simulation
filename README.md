@@ -44,9 +44,18 @@ class Office(object):
 
 class Customer(object):
   def __init__(self, in_time, errands):
-    """Create a new customer and randomize the amount of errands they have.
-    Store the time they entered the post-office."""
+    """Create a new customer and store the amount of errands they have
+    and the time they entered the post-office."""
     pass
+    
+    
+class Simulation(object):
+  def __init__(self, Controller):
+    """Runs the simulation with the current simulation
+    parameters taken from the controller)"""
+    
+class Controller(object):
+  def __init__(self):
 
 
 ```
