@@ -75,8 +75,8 @@ class View(object):
   * En main-funktion startas och;
   * Skapar en tk-inter ruta
   * Hämtar senaste controller-värdena från fil och skapar 
-    * _Controller_
+    * _Controller
     * Model-objekt
-    * View-objekt som får en referens till model
+    * View-objekt som får en referens till model_
     * 
   
