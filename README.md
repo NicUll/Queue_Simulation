@@ -38,7 +38,7 @@ class Office(object):
     
   def customer_done(self, out_time):
     """Increase the customer queue index 
-    the last customer from the queue"""
+    i.e. go to next customer."""
     pass
 
 
@@ -50,9 +50,18 @@ class Customer(object):
     
     
 class Simulation(object):
-  def __init__(self, Controller):
+  def __init__(self, view, model):
     """Runs the simulation with the current simulation
-    parameters taken from the controller."""
+    parameters."""
+    pass
+    
+  def start_simulation(self):
+    pass
+    
+  def pause_simulation(self):
+    pass
+    
+    
     
 class Model(object):
   def __init__(self):
@@ -75,8 +84,16 @@ class View(object):
   * En main-funktion startas och;
   * Skapar en tk-inter ruta
   * Hämtar senaste controller-värdena från fil och skapar 
-    * _Controller_
-    * Model-objekt
+    * Model-objekt med hämtade värden, skapar ett office-objekt
     * View-objekt som får en referens till model
-    * 
+    * Simulation-objekt med referens till view och model, startas pausad
+    * Controller med referens till simulering och model (som även håller i simuleringsvärden)
+  * View och controller ritas upp i tk-inter rutan
+2. Användaren kan välja att ändra parametrarna först eller starta simuleringen
+3. Simulering startas och simuleringsobjektet kallar på model och view för att
+   ändra parametrar, updatera kunder och skriva ut text. Controllern körs parallellt 
+   och kallar vid behov på model och simulation
+4. Text matas ut med information om kunder, användaren kan när som pausa simuleringen
+5. Simuleringen har kört färdigt och alla händelser finns kvar i rutan.
+6. Användaren avslutar programmmet.
   
