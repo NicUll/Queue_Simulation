@@ -52,12 +52,31 @@ class Customer(object):
 class Simulation(object):
   def __init__(self, Controller):
     """Runs the simulation with the current simulation
-    parameters taken from the controller)"""
+    parameters taken from the controller."""
     
+class Model(object):
+  def __init__(self):
+    pass
+
 class Controller(object):
   def __init__(self):
+    pass
+    
+class View(object):
+  def __init__(self, model):
+    pass
 
 
 ```
 
 ##Programflöde och dataflöde
+
+1. Programmet startas
+  * En main-funktion startas och;
+  * Skapar en tk-inter ruta
+  * Hämtar senaste controller-värdena från fil och skapar 
+    * Controller
+    * Model-objekt
+    * View-objekt som får en referens till model
+    * 
+  
