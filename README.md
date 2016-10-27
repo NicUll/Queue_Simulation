@@ -78,5 +78,5 @@ class View(object):
     * _Controller
     * Model-objekt
     * View-objekt som får en referens till model
-    * 
+    * _
   
