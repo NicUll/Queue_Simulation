@@ -61,6 +61,9 @@ class Simulation(object):
   def pause_simulation(self):
     pass
     
+  def update_parameters(self):
+    """Change the values used to simulate"""
+      pass
     
     
 class Model(object):
