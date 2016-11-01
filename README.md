@@ -104,7 +104,6 @@ class View(object):
 
 ###Klass - Data
 Office - Öppettider och tid per kund, lista med aktuella kunder.
-
 Customer - Enstaka kunder, deras tider och ärenden <- slumpas.
 
 Model - Office(simuleringsparametrar) + övriga simuleringsparametrar, storlek på fönster (view och controller)
