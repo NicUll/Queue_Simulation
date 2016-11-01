@@ -14,19 +14,24 @@ En utmaning blir att presentera datan på ett tydligt sätt och att skriva algor
 simuleringsparametrar som finns på ett smart sätt.
 
 ##Användarscenarier
-Kalle är nyfiken på hur lång tid han kan förvänta sig att få vänta att få 3st ärenden klara om han anländer vid 
-postkontoret kl 14:00. Han startar programmet och möts av ett fönster med en stor textruta för utdata till vänster, sliders för att ändra simuleringsparametrar samt start- och pausknappar under dessa, till höger. Han väljer att låta simuleringsparametrarna ha kvar sina standardvärden. Kalle är nu enbart intresserad av att veta hur lång tid det skulle ta för honom, och fyller därför i en textruta med sitt antal ärenden och vilket klockslag han tänkte anlända. Därefter klickar han på, "simulera enstaka kund" och får då i textrutan till vänster ut informationen:
-*"Kund som anländer kl 14:00 med 3 ärenden kan förväntas lämna postkontoret kl 14:07"*
-Kalle har nu fått sin uppskattade tid och väljer att klicka på "avsluta", programmet stängs då ner.
+Kalle vill ta reda på hur lång tid han kan förvänta sig att få vänta för att få 3st ärenden klara om han anländer vid 
+postkontoret kl 14:00 - mot slutet av hans lunchrast, detta då han måste var tillbaka på jobber kl 14:10. Han startar programmet och möts av ett fönster med en stor textruta för utdata till vänster, sliders för att ändra simuleringsparametrar samt start- och pausknappar under dessa, till höger. Han väljer att låta simuleringsparametrarna ha kvar sina standardvärden. Kalle är nu enbart intresserad av att veta hur lång tid det skulle ta för honom, och fyller därför i en textruta med sitt antal ärenden och vilket klockslag han tänkte anlända. Därefter klickar han på, "simulera enstaka kund" och får då i textrutan till vänster ut informationen:
+*"Kund som anländer kl 14:00 med 3 ärenden kan förväntas lämna postkontoret kl 14:09"*
+Kalle har nu fått sin uppskattade tid och inser att han får ta det en annan gång då det tar 4 minuter att gå tillbaka till jobbet. Sedan klickar han på "avsluta", programmet stängs då ner.
 
-Fru Franco undrar hur lång aktiv arbetstid hon kan förvänta sig samt hur länge hon kan räkna med att få jobba över en dag då många kunder har fler ärenden än vanligt. 
-Hon startar programmet och möts av samma gränssnitt som Kalle, hon höjer antal ärenden i genomsnitt per kund genom att dra i en slider till höger. Sedan startar hon simuleringen genom att klicka på knappen "simulera heldag". I rutan till vänster matas alla ärenden ut och allra sist står när sista kunden lämnar följt av; 
-* antal kunder 
-* total kötid
-* väntetid (enbart kö) per kund 
-* total arbetstid
-* arbetstid per kund
+Fru Franco som jobbar på kontoret ska bjuda några vänner på middag på kvällen och tänkte att de skulle leka några lekar under middagen. Hon har dock glömt att förbereda lekarna! Hon undrar därför hur lång aktiv arbetstid hon kan förvänta sig samt hur länge hon kan räkna med att få jobba över en dag då många kunder har fler ärenden än vanligt - det är lördag. Detta så hon vet om hon kan bli klar med lekarna då hon har dötid på jobbet, och när hon kan säga åt gästerna att komma hem till henne. 
+Hon startar programmet och möts av samma gränssnitt som Kalle, hon höjer antal ärenden i genomsnitt per kund genom att dra i en slider till höger. Sedan startar hon simuleringen genom att klicka på knappen "simulera heldag". I rutan till vänster matas alla ärenden ut och allra sist får hon ut:
+Kl 18:35 går kund 130
+Dagens statistik:
+* 130 Kunder
+* 70min i kö
+* 45s kötid per kund
+* 6h aktiv arbetstid
+* 1,5min arbetstid per kund
 
+Fru Franco bedömer att hon ändå kommer ha flera timmar under dagen som hon kan förbereda lekarna
+och inte behöver stressa. Däremot så får hon flytta fram tiden från 18:35 -som hon sagt till sina gäster-
+till 19:00 för att hinna hem först.
 Hon avslutar sedan programmet genom att klicka på "avsluta".
 
 ##Programskelett
@@ -101,8 +106,9 @@ class View(object):
 ```
 
 ##Programflöde och dataflöde
-```
+
 ###Klass - Data
+```
 Office - Öppettider och tid per kund, lista med aktuella kunder.
 
 Customer - Enstaka kunder, deras tider och ärenden <- slumpas.
