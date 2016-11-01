@@ -101,9 +101,10 @@ class View(object):
 ```
 
 ##Programflöde och dataflöde
-
+```
 ###Klass - Data
 Office - Öppettider och tid per kund, lista med aktuella kunder.
+
 Customer - Enstaka kunder, deras tider och ärenden <- slumpas.
 
 Model - Office(simuleringsparametrar) + övriga simuleringsparametrar, storlek på fönster (view och controller)
@@ -115,7 +116,7 @@ Simulation - View, model,
 Controller - Simulation, model
 
 Savefile - Simuleringsparametrar, referens till sparfilen
-
+```
 
 1. Programmet startas
   * En main-funktion startas och;
