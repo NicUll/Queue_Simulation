@@ -63,42 +63,51 @@ class Simulation(object):
     
   def update_parameters(self):
     """Change the values used to simulate"""
-      pass
+     pass
     
     
 class Model(object):
   def __init__(self, values):
     """Model object that holds the simulation parameters."""
     pass
+    
+class SaveFile(object):
+  def __init(self, filename):
+    """An object responsible for handling the savefile"""
+    pass
 
 class Controller(object):
   def __init__(self):
+    """The controller that changes simulation parameters."""
     pass
     
 class View(object):
   def __init__(self, model):
+    """The view that displays the GUI and outputs the simulation data."""
     pass
 
 
 ```
-la
+
 ##Programflöde och dataflöde
 
 1. Programmet startas
   * En main-funktion startas och;
   * Skapar en tk-inter ruta
-  * Hämtar senaste controller-värdena från fil och skapar 
-    * Model-objekt med hämtade värden, skapar ett office-objekt
+  * Hämtar senaste controller-värdena från fil genom att
+   skapa ett savefile objekt med referens till sparfilen 
+   (om den finns, annars skapas filen) och skapar sedan:
+    * Model-objekt med hämtade värden -> skapar ett office-objekt
     * View-objekt som får en referens till model
     * Simulation-objekt med referens till view och model, startas pausad
-    * Controller med referens till simulering och model (som även håller i simuleringsvärden)
+    * Controller med referens till simulering och model (som även håller i start-simuleringsvärden åt controller)
   * View och controller ritas upp i tk-inter rutan
 2. Användaren kan välja att ändra parametrarna först eller starta simuleringen
-3. Simulering startas och simuleringsobjektet kallar på model och view för att
-   ändra parametrar, updatera kunder och skriva ut text. Controllern körs parallellt 
+3. Simulering startas och körs i en main-loop där simuleringsobjektet kallar på model och view för att
+   ändra parametrar, updatera kunder och skriva ut text. Controllern körs om lott 
    och kallar vid behov på model och simulation
-4. Text matas ut med information om kunder, användaren kan när som pausa simuleringen
+4. Text matas ut med information om kunder, användaren kan när som pausa simuleringen (main-loopen)
 5. Simuleringen har kört färdigt och alla händelser finns kvar i rutan.
 6. Användaren avslutar programmmet.
-7. Testrad
+
   
