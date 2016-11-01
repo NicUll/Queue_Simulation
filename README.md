@@ -15,10 +15,18 @@ simuleringsparametrar som finns på ett smart sätt.
 
 ##Användarscenarier
 Kalle är nyfiken på hur lång tid han kan förvänta sig att få vänta att få 3st ärenden klara om han anländer vid 
-postkontoret kl 14:00. Han startar programmet och skriver in värdena, utdatan blir just vilken tid han kan vänta sig att lämna.
+postkontoret kl 14:00. Han startar programmet och möts av ett fönster med en stor textruta för utdata till vänster, sliders för att ändra simuleringsparametrar samt start- och pausknappar under dessa, till höger. Han väljer att låta simuleringsparametrarna ha kvar sina standardvärden. Kalle är nu enbart intresserad av att veta hur lång tid det skulle ta för honom, och fyller därför i en textruta med sitt antal ärenden och vilket klockslag han tänkte anlända. Därefter klickar han på, "simulera enstaka kund" och får då i textrutan till vänster ut informationen:
+*"Kund som anländer kl 14:00 med 3 ärenden kan förväntas lämna postkontoret kl 14:07"*
+Kalle har nu fått sin uppskattade tid och väljer att klicka på "avsluta", programmet stängs då ner.
 
-Fru Franco undrar hur länge hon kan räkna med att få jobba över en dag då många kunder har flera ärenden, 
-hon startar programmet och höjer antal ärenden per kund. Sedan startar hon simuleringen och ser när den sista kunden lämnar.
+Fru Franco undrar hur lång aktiv arbetstid hon kan förvänta sig samt hur länge hon kan räkna med att få jobba över en dag då många kunder har fler ärenden än vanligt. 
+Hon startar programmet och höjer antal ärenden i genomsnitt per kund genom att dra i en slider till höger. Sedan startar hon simuleringen genom att klicka på knappen "simulera heldag". I rutan till vänster matas alla ärenden ut och allra sist står när sista kunden lämnar följt av; 
+* antal kunder 
+* total kötid
+* väntetid (enbart kö) per kund 
+* total arbetstid
+* arbetstid per kund
+
 
 ##Programskelett
 ```python
@@ -95,8 +103,8 @@ class View(object):
   * En main-funktion startas och;
   * Skapar en tk-inter ruta
   * Hämtar senaste controller-värdena från fil genom att
-   skapa ett savefile objekt med referens till sparfilen 
-   (om den finns, annars skapas filen) och skapar sedan:
+    skapa ett savefile objekt med referens till sparfilen 
+    (om den finns, annars skapas filen) och skapar sedan:
     * Model-objekt med hämtade värden -> skapar ett office-objekt
     * View-objekt som får en referens till model
     * Simulation-objekt med referens till view och model, startas pausad
