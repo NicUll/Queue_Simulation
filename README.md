@@ -20,7 +20,7 @@ postkontoret kl 14:00. Han startar programmet och möts av ett fönster med en s
 Kalle har nu fått sin uppskattade tid och väljer att klicka på "avsluta", programmet stängs då ner.
 
 Fru Franco undrar hur lång aktiv arbetstid hon kan förvänta sig samt hur länge hon kan räkna med att få jobba över en dag då många kunder har fler ärenden än vanligt. 
-Hon startar programmet och höjer antal ärenden i genomsnitt per kund genom att dra i en slider till höger. Sedan startar hon simuleringen genom att klicka på knappen "simulera heldag". I rutan till vänster matas alla ärenden ut och allra sist står när sista kunden lämnar följt av; 
+Hon startar programmet och möts av samma gränssnitt som Kalle, hon höjer antal ärenden i genomsnitt per kund genom att dra i en slider till höger. Sedan startar hon simuleringen genom att klicka på knappen "simulera heldag". I rutan till vänster matas alla ärenden ut och allra sist står när sista kunden lämnar följt av; 
 * antal kunder 
 * total kötid
 * väntetid (enbart kö) per kund 
@@ -77,7 +77,8 @@ class Simulation(object):
     
 class Model(object):
   def __init__(self, values):
-    """Model object that holds the simulation parameters."""
+    """Model object that holds the simulation parameters
+    and an office object."""
     pass
     
 class SaveFile(object):
@@ -86,8 +87,9 @@ class SaveFile(object):
     pass
 
 class Controller(object):
-  def __init__(self):
-    """The controller that changes simulation parameters."""
+  def __init__(self, simulation, model):
+    """The controller in the form of sliders and buttons 
+    that changes simulation parameters."""
     pass
     
 class View(object):
@@ -100,23 +102,39 @@ class View(object):
 
 ##Programflöde och dataflöde
 
+###Klass - Data
+Office - Öppettider och tid per kund, lista med aktuella kunder.
+Customer - Enstaka kunder, deras tider och ärenden <- slumpas.
+Model - Office(simuleringsparametrar) + övriga simuleringsparametrar, storlek på fönster (view och controller)
+View - Model, Viss formaterings-/styledata för textutmatning. 
+Simulation - View, model, 
+Controller - Simulation, model
+Savefile - Simuleringsparametrar, referens till sparfilen
+
+
 1. Programmet startas
   * En main-funktion startas och;
   * Skapar en tk-inter ruta
-  * Hämtar senaste controller-värdena från fil genom att
-    skapa ett savefile objekt med referens till sparfilen 
-    (om den finns, annars skapas filen) och skapar sedan:
-    * Model-objekt med hämtade värden -> skapar ett office-objekt
-    * View-objekt som får en referens till model
+  * Hämtar senaste controller-värdena från fil genom att skapa ett savefile objekt med referens till sparfilen 
+    (om den finns, annars skapas filen). Värdena är tid/kund, ärenden/kund och öppettider. Sedan skapas:
+    * Model-objekt med hämtade controller-värden -> skapar ett office-objekt som får tiderna.
+      Model-objektet håller hela tiden referensen till kontoret (office-objektet)
+    * View-objekt som får en referens till model och hämtar sina värden, view är den ruta till vänster
+      där text matas ut.
     * Simulation-objekt med referens till view och model, startas pausad
-    * Controller med referens till simulering och model (som även håller i start-simuleringsvärden åt controller)
+    * Controller med referens till simulering och model (som även håller i start-simuleringsvärden åt controller).
+      Controller är de sliders och knappar som ska befinna sig till höger i fönstret
   * View och controller ritas upp i tk-inter rutan
 2. Användaren kan välja att ändra parametrarna först eller starta simuleringen
-3. Simulering startas och körs i en main-loop där simuleringsobjektet kallar på model och view för att
-   ändra parametrar, updatera kunder och skriva ut text. Controllern körs om lott 
-   och kallar vid behov på model och simulation
+   med en av knapparna "simulera enstaka kund" eller "simulera heldag"
+   Innan simuleringen startats modifierar controllern simulation och model om
+   controllern upptäcker några ändringar
+3. Simulering startas och körs i en main-loop där simuleringsobjektet kallar dels på model för att
+   hämta simuleringsparametrar och updatera kunderna i office-objektet genom sina slumpfunktioner,
+   och dels på view för att skriva ut text för varje gång en händelse skett med modellen, alternativt
+   när programmet är klart om "simulera enstaka kund är valt".
 4. Text matas ut med information om kunder, användaren kan när som pausa simuleringen (main-loopen)
-5. Simuleringen har kört färdigt och alla händelser finns kvar i rutan.
-6. Användaren avslutar programmmet. 
+5. Simuleringen har kört färdigt och alla händelser finns kvar i rutan
+6. Användaren avslutar programmmet 
 
   
