@@ -108,6 +108,6 @@ class View(object):
    och kallar vid behov på model och simulation
 4. Text matas ut med information om kunder, användaren kan när som pausa simuleringen (main-loopen)
 5. Simuleringen har kört färdigt och alla händelser finns kvar i rutan.
-6. Användaren avslutar programmmet.
+6. Användaren avslutar programmmet. 
 
   
