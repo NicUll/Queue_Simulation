@@ -104,11 +104,17 @@ class View(object):
 
 ###Klass - Data
 Office - Öppettider och tid per kund, lista med aktuella kunder.
+
 Customer - Enstaka kunder, deras tider och ärenden <- slumpas.
+
 Model - Office(simuleringsparametrar) + övriga simuleringsparametrar, storlek på fönster (view och controller)
+
 View - Model, Viss formaterings-/styledata för textutmatning. 
+
 Simulation - View, model, 
+
 Controller - Simulation, model
+
 Savefile - Simuleringsparametrar, referens till sparfilen
 
 
