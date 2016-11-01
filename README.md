@@ -124,7 +124,7 @@ Controller - Simulation, model
 
 Savefile - Simuleringsparametrar, referens till sparfilen
 ```
-
+###Flöde
 1. Programmet startas
   * En main-funktion startas och;
   * Skapar en tk-inter ruta
