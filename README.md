@@ -26,7 +26,7 @@ Hon startar programmet och höjer antal ärenden i genomsnitt per kund genom att
 * väntetid (enbart kö) per kund 
 * total arbetstid
 * arbetstid per kund
-
+Hon avslutar sedan programmet genom att klicka på "avsluta".
 
 ##Programskelett
 ```python
