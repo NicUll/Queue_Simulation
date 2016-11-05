@@ -13,7 +13,8 @@ class MyTestCase(unittest.TestCase):
     def test_creation(self):
         self.assertIsInstance(self.m_office, Office)
         self.assertEqual(self.m_office.time_per_customer, self.time_per_customer)
-        self.assertEqual(self.m_office.times, self.times)
+        self.assertEqual(self.m_office.open_time, self.times[0])
+        self.assertEqual(self.m_office.close_time, self.times[1])
         self.assertEqual(self.m_office.clock, 0)
         self.assertEqual(self.m_office.customers, deque([]))
 

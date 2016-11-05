@@ -5,7 +5,7 @@ from app.customer import Customer
 class MyTestCase(unittest.TestCase):
     def setUp(self):
         self.m_office_clock = 0
-        self.m_cust1 = Customer(self.m_office_clock)
+        self.m_cust1 = Customer(self.m_office_clock, 0)
         self.m_cust1_in_time = 0
 
     def test_creation(self):

@@ -8,7 +8,8 @@ class Office(object):
         business-hours and the time it takes per customer.
         A list is also initiated that will hold the customer queue,
         together with an index keeping track of current customer."""
-        self.times = times
+        self.open_time = times[0]
+        self.close_time = times[1]
         self.time_per_customer = time_per_customer
         self.clock = 0
         self.customers = deque([])
@@ -17,9 +18,9 @@ class Office(object):
     def add_customer(self):
         """Add a customer to the queue.
         Return the customer object"""
-        new_customer = Customer(self.clock)
-        self.customers.append(new_customer)
         self.total_customer_amount += 1
+        new_customer = Customer(self.clock, self.total_customer_amount)
+        self.customers.append(new_customer)
         return new_customer
 
     def handle_customer(self):
