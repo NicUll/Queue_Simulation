@@ -12,12 +12,14 @@ class Office(object):
         self.time_per_customer = time_per_customer
         self.clock = 0
         self.customers = deque([])
+        self.total_customer_amount = 0
 
     def add_customer(self):
         """Add a customer to the queue.
         Return the customer object"""
         new_customer = Customer(self.clock)
         self.customers.append(new_customer)
+        self.total_customer_amount += 1
         return new_customer
 
     def handle_customer(self):

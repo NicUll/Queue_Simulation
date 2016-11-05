@@ -1,7 +1,8 @@
 class Simulation(object):
-    def __init__(self, view, model):
+    def __init__(self, view, model, speed):
         """Runs the simulation with the current simulation
         parameters."""
+        self.speed = speed  # The simulation speed
         pass
 
     def start_simulation(self):
