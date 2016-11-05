@@ -19,7 +19,8 @@ class Model(object):
             self.customer_amount += 1
         if self.next_out_time is None and self.customer_amount > 0:
             self.next_out_time = self.office.handle_customer()
-        elif
+        #TODO check if a customer is done and go to next customer in queue
+        #elif
 
         self.office.work()
         self.update_time()
