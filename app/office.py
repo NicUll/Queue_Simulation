@@ -14,6 +14,8 @@ class Office(object):
         self.clock = 0  # Current clock time in minutes, increments every time customer is handled
         self.customers = deque([])  # A deque (list) holding current customers in que
         self.total_customer_amount = 0  # Total customers that has entered the office up until now
+        self.open = True
+        # Todo make use of self.open and close the office when appropriate
 
     def add_customer(self):
         """Add a customer to the queue.
@@ -36,5 +38,3 @@ class Office(object):
         """Increase the customer queue index
         i.e. go to next customer."""
         return self.customers.popleft()  # Remove customer from queue when done
-
-
