@@ -54,12 +54,13 @@ class MyTestCase(unittest.TestCase):
 
     def test_close_office(self):
         #Amount of minutes open, 09:00-18:00, 539
-        self.total_open_time = 540
+        self.total_open_time = 539
         minute = 0
         while minute < self.total_open_time:
             self.m_office.work()
             self.assertTrue(self.m_office.open)
             minute += 1
+        self.m_office.work()
         self.assertFalse(self.m_office.open)
 
 

@@ -47,8 +47,6 @@ class Office(object):
         self.clock += 1  # Increment office clock by one
         if self.clock == self.open_time_in_minutes:
             self.open = False
-            print(self.clock)
-            print(self.open)
 
     def finish_customer(self):
         """Increase the customer queue index
