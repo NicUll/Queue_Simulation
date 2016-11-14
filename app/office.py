@@ -10,12 +10,24 @@ class Office(object):
         together with an index keeping track of current customer."""
         self.open_time = times[0]  # The time the office opens
         self.close_time = times[1]  # The time the office closes
+        self.open_time_in_minutes = self.calculate_open_time()
         self.time_per_customer = time_per_customer  # Time it takes to handle a customer
         self.clock = 0  # Current clock time in minutes, increments every time customer is handled
         self.customers = deque([])  # A deque (list) holding current customers in que
         self.total_customer_amount = 0  # Total customers that has entered the office up until now
         self.open = True
         # Todo make use of self.open and close the office when appropriate
+
+    def calculate_open_time(self):
+        open_in_minutes = Office.clock_to_minutes(self.open_time)
+        close_in_minutes = Office.clock_to_minutes(self.close_time)
+        return close_in_minutes - open_in_minutes
+
+    @staticmethod
+    def clock_to_minutes(time):
+        hours = int(time[:2])
+        minutes = int(time[3:])
+        return hours*60 + minutes
 
     def add_customer(self):
         """Add a customer to the queue.
@@ -33,6 +45,10 @@ class Office(object):
 
     def work(self):
         self.clock += 1  # Increment office clock by one
+        if self.clock == self.open_time_in_minutes:
+            self.open = False
+            print(self.clock)
+            print(self.open)
 
     def finish_customer(self):
         """Increase the customer queue index

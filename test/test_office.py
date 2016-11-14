@@ -6,6 +6,7 @@ from _collections import deque
 
 class MyTestCase(unittest.TestCase):
     def setUp(self):
+        #DO NOT CHANGE THESE TEST VALUES
         self.times = ("09:00", "18:00")
         self.time_per_customer = 2
         self.m_office = Office(self.times, self.time_per_customer)
@@ -43,6 +44,23 @@ class MyTestCase(unittest.TestCase):
         done_customer = self.m_office.finish_customer()
         self.assertEqual(self.m_office.customers, deque([]))
         self.assertEqual(done_customer, customer2)
+
+    def test_clock_conversion(self):
+        self.assertEqual(Office.clock_to_minutes("02:00"), 120)
+        self.assertEqual(Office.clock_to_minutes("04:30"), 270)
+
+    def test_open_time_in_minutes(self):
+        self.assertEqual(self.m_office.open_time_in_minutes, 540)
+
+    def test_close_office(self):
+        #Amount of minutes open, 09:00-18:00, 539
+        self.total_open_time = 540
+        minute = 0
+        while minute < self.total_open_time:
+            self.m_office.work()
+            self.assertTrue(self.m_office.open)
+            minute += 1
+        self.assertFalse(self.m_office.open)
 
 
 if __name__ == '__main__':
