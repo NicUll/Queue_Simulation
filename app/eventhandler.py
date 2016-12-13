@@ -1,27 +1,28 @@
+from _collections import deque
 
 
 class EventHandler(object):
     def __init__(self):
         self.time = ""
-        self.events = []
+        self.events = deque([])
         self.has_event = False
 
     def clear_events(self):
-        self.events = []
+        self.events = deque([])
         self.has_event = False
 
-    def add_event(self, event):
-        self.events.append(event)
+    def add_event(self, event, index):
+        if index == len(self.events) - 1:
+            self.events[index] += " och {}".format(event)
+        else:
+            self.events.append(event)
         self.has_event = True
 
-    def __str__(self):
+    def get_event(self):
         if self.has_event:
-
-            event_string = self.events[0]
-            for i in range(1, len(self.events) - 1):
-                event_string += ", " + self.events[i]
-            if len(self.events) > 1:
-                event_string += " och " + self.events[-1]
-            return "Kl {} {}".format(self.time, event_string)
+            event = "Kl {} - {}".format(self.time, self.events.popleft())
+            self.has_event = len(self.events) and True
+            return event
         else:
-            return "Inga händelser"
+            return "Inga nya händelser"
+

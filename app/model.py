@@ -1,4 +1,5 @@
 from app.office import Office
+from app.eventhandler import EventHandler
 from random import random
 
 
@@ -13,10 +14,13 @@ class Model(object):
         self.current_timestring = times[0]  # The current time in text format, e.g. 10:58
         self.x_size = x_size
         self.y_size = y_size
+        self.event_handler = EventHandler()
 
     def step(self):
         """Method for stepping through the simulation one step
         i.e. one minute."""
+        self.event_handler.time = self.current_timestring
+        self.event_handler.clear_events()
         customer = None  # Generate a customer with a change of "frequency" e.g. 0.2
         if random() < self.frequency:
             customer = self.office.add_customer()
