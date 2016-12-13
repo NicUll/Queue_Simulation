@@ -40,7 +40,7 @@ class Office(object):
     def handle_customer(self):
         """Start helping customer, return end-time"""
         current_customer = self.customers[0]  # Select first customer in the queue
-        out_time = current_customer.errands * self.time_per_customer  # Time customer will leave
+        out_time = self.clock + current_customer.errands * self.time_per_customer  # Time customer will leave
         return out_time
 
     def work(self):

@@ -1,5 +1,6 @@
 import unittest
-from app.customertime import CustomerTime
+
+from deprecated.customertime import CustomerTime
 
 
 class MyTestCase(unittest.TestCase):

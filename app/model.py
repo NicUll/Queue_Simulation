@@ -3,7 +3,7 @@ from random import random
 
 
 class Model(object):
-    def __init__(self, times, time_per_customer, frequency):
+    def __init__(self, times, time_per_customer, frequency, x_size="800", y_size="640"):
         """Model object that holds the simulation parameters
         and an office object."""
         self.office = Office(times, time_per_customer)  # Create and store a post-office
@@ -11,6 +11,8 @@ class Model(object):
         self.customers_in_queue = 0  # Total amount of customers that's been handled
         self.frequency = frequency  # The frequency with which customers enter the office
         self.current_timestring = times[0]  # The current time in text format, e.g. 10:58
+        self.x_size = x_size
+        self.y_size = y_size
 
     def step(self):
         """Method for stepping through the simulation one step
