@@ -4,7 +4,8 @@ from _collections import deque
 
 class Office(object):
     office_events = {0: "Inga händelser", 1: "Kontoret stänger dörrarna",
-                     2: "Kontoret har blivit rånat"}
+                     2: "Kontoret har stängt helt för dagen",
+                     3: "Kontoret har blivit rånat"}
 
     def __init__(self, times, time_per_customer):
         """Create a post-office object with parameters for
@@ -54,6 +55,8 @@ class Office(object):
         if self.clock == self.open_time_in_minutes:
             self.open = False
             self.latest_event = 1
+        if not self.is_working:
+            self.latest_event = 2
         return self.latest_event
 
     def finish_customer(self):

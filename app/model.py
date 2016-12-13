@@ -19,32 +19,47 @@ class Model(object):
     def step(self):
         """Method for stepping through the simulation one step
         i.e. one minute."""
-        self.event_handler.time = self.current_timestring
-        self.event_handler.clear_events()
+
+        self.event_handler.time = self.current_timestring  # Update the event handlers
+        self.event_handler.clear_events()  # time and erase prev events
+
+        # Block that handles generating new customers
         customer = None  # Generate a customer with a change of "frequency" e.g. 0.2
-        if self.next_out_time == self.office.clock:  # Check if a customer should be done now and
-            prev_customer = self.office.finish_customer()  # Remove them from the queue
-            self.event_handler.add_event("kund {} går".format(prev_customer.id))
-            self.next_out_time = None
         if (random() < self.frequency) and self.office.open:
             customer = self.office.add_customer()
-            self.event_handler.add_event("kund {} kommer in".format(customer.id))
+            self.event_handler.add_event("Kund {} kommer in".format(customer.id))
+
+        # Block that handles finishing current customer
+        queue_empty_before = True
+        if self.next_out_time == self.office.clock:  # Check if a customer should be done now and
+            self.event_handler.add_event("får plats {} i kön".format(len(self.office.customers)), increase=False)
+            prev_customer = self.office.finish_customer()  # Remove them from the queue
+            self.event_handler.add_event("Kund {} går".format(prev_customer.id))
+            self.next_out_time = None
+            queue_empty_before = False
+
+        # Block that handles getting to the next customer
         self.customers_in_queue = len(self.office.customers)
+        # Check if no customer is being helped and there is a queue
         if self.next_out_time is None and self.customers_in_queue > 0:
-            # Check if no customer is being helped
-            # and there is a queue
             self.next_out_time = self.office.handle_customer()
             next_customer = self.office.customers[0]
             event_string = "kund {} blir betjänad".format(next_customer.id)
-            if next_customer == customer:
+            if (next_customer == customer) and queue_empty_before:
                 event_string = "blir genast betjänad"
             self.event_handler.add_event(event_string, increase=False)
+
+        # Call work method on office and check if any events are returned
         if self.office.work() > 0:
             self.event_handler.add_event(self.office.office_events[self.office.latest_event])
+
+        # Call method to generate the time-string for printing
         self.update_time()
         return customer
 
     def update_time(self):
+        """Method for making the current time into a
+        printable string for output"""
         start_hour = int(self.office.open_time[:2])
         start_minute = int(self.office.close_time[3:])
         current_office_clock = self.office.clock

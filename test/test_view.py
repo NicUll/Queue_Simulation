@@ -17,9 +17,10 @@ class MyTestCase(unittest.TestCase):
     def test_something(self):
         self.root.update()
         while self.model.office.is_working:
+            self.model.step()
             while self.model.event_handler.has_event:
                 self.application.update_text_box("end", "\n" + self.model.event_handler.get_event())
-            self.model.step()
+
             self.root.update()
         self.root.mainloop()
 
