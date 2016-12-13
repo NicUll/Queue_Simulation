@@ -3,6 +3,9 @@ from _collections import deque
 
 
 class Office(object):
+    office_events = {0: "Inga händelser", 1: "Kontoret har stängts",
+                     2: "Kontoret har blivit rånat"}
+
     def __init__(self, times, time_per_customer):
         """Create a post-office object with parameters for
         business-hours and the time it takes per customer.
@@ -16,6 +19,8 @@ class Office(object):
         self.customers = deque([])  # A deque (list) holding current customers in que
         self.total_customer_amount = 0  # Total customers that has entered the office up until now
         self.open = True
+        self.is_working = True
+        self.latest_event = 0
         # Todo make use of self.open and close the office when appropriate
 
     def calculate_open_time(self):
@@ -27,7 +32,7 @@ class Office(object):
     def clock_to_minutes(time):
         hours = int(time[:2])
         minutes = int(time[3:])
-        return hours*60 + minutes
+        return hours * 60 + minutes
 
     def add_customer(self):
         """Add a customer to the queue.
@@ -45,10 +50,18 @@ class Office(object):
 
     def work(self):
         self.clock += 1  # Increment office clock by one
+        self.latest_event = 0
         if self.clock == self.open_time_in_minutes:
             self.open = False
+            self.latest_event = 1
+        return self.latest_event
 
     def finish_customer(self):
         """Increase the customer queue index
         i.e. go to next customer."""
-        return self.customers.popleft()  # Remove customer from queue when done
+        return_customer = self.customers.popleft() # Remove customer from queue when done
+        if not self.open and (len(self.customers) == 0):
+            self.is_working = False
+            print(self.open)
+            print("Jobbat färdigt")
+        return return_customer
