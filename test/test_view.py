@@ -15,7 +15,6 @@ class MyTestCase(unittest.TestCase):
         self.application = View(self.root, self.model)
 
     def test_something(self):
-        self.application.update_text_box("end", "Hello there")
         self.root.update()
         while self.model.office.is_working:
             while self.model.event_handler.has_event:

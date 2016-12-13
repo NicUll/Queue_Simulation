@@ -3,7 +3,7 @@ from _collections import deque
 
 
 class Office(object):
-    office_events = {0: "Inga händelser", 1: "Kontoret har stängts",
+    office_events = {0: "Inga händelser", 1: "Kontoret stänger dörrarna",
                      2: "Kontoret har blivit rånat"}
 
     def __init__(self, times, time_per_customer):

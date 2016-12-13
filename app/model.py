@@ -22,23 +22,23 @@ class Model(object):
         self.event_handler.time = self.current_timestring
         self.event_handler.clear_events()
         customer = None  # Generate a customer with a change of "frequency" e.g. 0.2
-        if (random() < self.frequency) and self.office.open:
-            customer = self.office.add_customer()
-            self.event_handler.add_event("kund {} kommer in".format(customer.id))
-            print("Customer generated")
         if self.next_out_time == self.office.clock:  # Check if a customer should be done now and
             prev_customer = self.office.finish_customer()  # Remove them from the queue
             self.event_handler.add_event("kund {} går".format(prev_customer.id))
             self.next_out_time = None
-            print("Customer done")
+        if (random() < self.frequency) and self.office.open:
+            customer = self.office.add_customer()
+            self.event_handler.add_event("kund {} kommer in".format(customer.id))
         self.customers_in_queue = len(self.office.customers)
         if self.next_out_time is None and self.customers_in_queue > 0:
             # Check if no customer is being helped
             # and there is a queue
             self.next_out_time = self.office.handle_customer()
             next_customer = self.office.customers[0]
-            self.event_handler.add_event("kund {} blir betjänad".format(next_customer.id), False)
-            print("Customer being handled")
+            event_string = "kund {} blir betjänad".format(next_customer.id)
+            if next_customer == customer:
+                event_string = "blir genast betjänad"
+            self.event_handler.add_event(event_string, increase=False)
         if self.office.work() > 0:
             self.event_handler.add_event(self.office.office_events[self.office.latest_event])
         self.update_time()
