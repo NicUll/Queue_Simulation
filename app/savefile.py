@@ -18,9 +18,9 @@ class SaveFile(object):
             with open(self.filename, "w") as file:
 
                 file.write("{}\n{},{}\n{}".format(self.time_per_customer, self.open_times[0], self.open_times[1],
-                                                       self.new_customer_odds))
+                                                  self.new_customer_odds))
 
-    def save_data(self, time_per_customer, open_times, new_customer_odds):
+    def save_data(self, time_per_customer, open_time, close_time, new_customer_odds):
         with open(self.filename, "w") as file:
-            file.write("{}\n{},{}\n{}".format(time_per_customer, open_times[0], open_times[1],
-                                                   new_customer_odds))
+            file.write("{}\n{},{}\n{}".format(time_per_customer, open_time, close_time,
+                                              new_customer_odds))
