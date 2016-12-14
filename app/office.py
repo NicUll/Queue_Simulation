@@ -67,6 +67,4 @@ class Office(object):
         return_customer = self.customers.popleft() # Remove customer from queue when done
         if not self.open and (len(self.customers) == 0):
             self.is_working = False
-            print(self.open)
-            print("Jobbat färdigt")
         return return_customer

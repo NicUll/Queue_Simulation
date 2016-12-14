@@ -17,10 +17,10 @@ simulation = Simulation(application, model, 5)
 controller = Controller(root, simulation, model)
 controller.grid(column=1, row=0)
 
-run = True
-
 
 def task():
+    root.update_idletasks()
+    root.update()
     while model.office.is_working:
         if simulation.run:
             model.step()
@@ -28,14 +28,14 @@ def task():
                 application.update_text_box("end", "\n" + model.event_handler.get_event())
         root.update_idletasks()
         root.update()
+    root.after(0, task)
 
 
 root.update()
-root.after(0,task)
+root.after(0, task)
 root.mainloop()
 
 
 
-    # savefile.save_data(model.office.time_per_customer, model.office.open_time, model.office.close_time,
-    # model.new_customer_odds)
-print("stuff")
+# savefile.save_data(model.office.time_per_customer, model.office.open_time, model.office.close_time,
+# model.new_customer_odds)
