@@ -10,7 +10,7 @@ class Model(object):
         self.office = Office(times, time_per_customer)  # Create and store a post-office
         self.next_out_time = None  # Initialize a field that will keep track of current customers out time
         self.customers_in_queue = 0  # Total amount of customers that's been handled
-        self.odds = odds  # The odds of a customer entering the office
+        self.new_customer_odds = odds  # The odds of a customer entering the office
         self.current_timestring = self.office.open_time  # The current time in text format, e.g. 10:58
         self.x_size = x_size
         self.y_size = y_size
@@ -34,7 +34,7 @@ class Model(object):
 
         # Block that handles generating new customers
         customer = None  # Generate a customer with a change of "frequency" e.g. 0.2
-        if (random() < self.odds) and self.office.open:
+        if (random() < self.new_customer_odds) and self.office.open:
             customer = self.office.add_customer()
             self.event_handler.add_event("Kund {} kommer in".format(customer.id))
 

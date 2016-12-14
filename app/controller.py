@@ -18,5 +18,7 @@ class Controller(Frame):
         self.simulation.start_simulation()
 
     def reset(self):
+        self.simulation.pause_simulation()
         self.simulation.view.reset()
         self.model.reset()
+
