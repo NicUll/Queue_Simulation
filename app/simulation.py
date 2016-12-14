@@ -1,7 +1,6 @@
 from app.model import Model
 
 
-
 class Simulation(object):
     def __init__(self, view, model, speed):
         """Runs the simulation with the current simulation

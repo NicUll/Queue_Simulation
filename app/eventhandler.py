@@ -4,9 +4,7 @@ from _collections import deque
 class EventHandler(object):
     def __init__(self):
         self.time = ""
-        self.events = deque([])
-        self.has_event = False
-        self.current_index = 0
+        self.clear_events()
 
     def clear_events(self):
         self.events = deque([])

@@ -11,17 +11,24 @@ class Model(object):
         self.next_out_time = None  # Initialize a field that will keep track of current customers out time
         self.customers_in_queue = 0  # Total amount of customers that's been handled
         self.odds = odds  # The odds of a customer entering the office
-        self.current_timestring = times[0]  # The current time in text format, e.g. 10:58
+        self.current_timestring = self.office.open_time  # The current time in text format, e.g. 10:58
         self.x_size = x_size
         self.y_size = y_size
         self.event_handler = EventHandler()
+
+    def reset(self):
+        self.office.reset()
+        self.event_handler.clear_events()
+        self.customers_in_queue = 0
+        self.next_out_time = None
+        self.current_timestring = self.office.open_time  # The current time in text format, e.g. 10:58
 
     def step(self):
         """Method for stepping through the simulation one step
         i.e. one minute."""
 
         self.event_handler.time = self.current_timestring  # Update the event handlers
-        self.event_handler.clear_events()                  # time and erase prev events
+        self.event_handler.clear_events()  # time and erase prev events
         self.customers_in_queue = len(self.office.customers)
         queue_not_empty_before = self.customers_in_queue and True
 

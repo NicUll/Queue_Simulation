@@ -16,13 +16,15 @@ class Office(object):
         self.close_time = times[1]  # The time the office closes
         self.open_time_in_minutes = self.calculate_open_time()
         self.time_per_customer = time_per_customer  # Time it takes to handle a customer
+        self.reset()
+
+    def reset(self):
         self.clock = 0  # Current clock time in minutes, increments every time customer is handled
         self.customers = deque([])  # A deque (list) holding current customers in que
         self.total_customer_amount = 0  # Total customers that has entered the office up until now
         self.open = True
         self.is_working = True
         self.latest_event = 0
-        # Todo make use of self.open and close the office when appropriate
 
     def calculate_open_time(self):
         open_in_minutes = Office.clock_to_minutes(self.open_time)
