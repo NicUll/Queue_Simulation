@@ -52,6 +52,7 @@ class Model(object):
             self.event_handler.add_event(event_string, increase=False)
 
         # Call work method on office and check if any events are returned
+
         if self.office.work() > 0:
             self.event_handler.add_event(self.office.office_events[self.office.latest_event])
 
