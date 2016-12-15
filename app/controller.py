@@ -19,11 +19,13 @@ class Controller(Frame):
     def create_widgets(self):
         """Method the create the controller objects"""
         self.start_button = Button(self, text="Starta", command=self.start)
-        self.start_button.grid(row=0, column=0)
+        self.start_button.grid(row=0, column=0, columnspan=2,pady="5")
         self.reset_button = Button(self, text="Återställ", command=self.reset)
-        self.reset_button.grid(row=1, column=0)
+        self.reset_button.grid(row=1, column=0, columnspan=2, pady="5")
+        self.times = Label(self, text="Öppettider")
+        self.times.grid(row=2,column=0,columnspan=2)
         self.save_button = Button(self, text="Spara", command=self.save)
-        self.save_button.grid(row=2,column=0)
+        self.save_button.grid(row=5,column=0, columnspan=2)
 
         self.open_hour = StringVar(self.root)
         self.open_hour.set(self.savefile.open_times[0][:2])
@@ -41,10 +43,10 @@ class Controller(Frame):
         self.close_minute.set(self.savefile.open_times[1][3:])
         self.close_m_drop = OptionMenu(self, self.close_minute, *Controller.MINUTES)
 
-        self.open_h_drop.grid(column=1, row=0)
-        self.open_m_drop.grid(column=2, row=0)
-        self.close_h_drop.grid(column=1, row=1)
-        self.close_m_drop.grid(column=2, row=1)
+        self.open_h_drop.grid(column=0, row=3)
+        self.open_m_drop.grid(column=1, row=3)
+        self.close_h_drop.grid(column=0, row=4)
+        self.close_m_drop.grid(column=1, row=4)
 
     def start(self):
         """Method called when clicking the start button"""

@@ -16,7 +16,7 @@ view.grid(column=0, row=0)  # Place window to the left
 simulation = Simulation(view, model, 5)  # Make the object that controls all events
 
 controller = Controller(root, simulation, model, savefile)  # Create the GUI to interact with the simulation
-controller.grid(column=1, row=0)  # Place controllers to the right
+controller.grid(column=1, row=0, sticky=(N,S))  # Place controllers to the right
 
 
 def task():  # Function that runs all the time

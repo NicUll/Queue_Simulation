@@ -79,8 +79,8 @@ class Model(object):
         start_hour = int(self.office.open_time[:2])
         start_minute = int(self.office.open_time[3:])
         current_office_clock = self.office.clock
-        current_hour = start_hour + current_office_clock // 60
-        current_minute = start_minute + current_office_clock % 60
+        current_hour = start_hour + (current_office_clock + start_minute) // 60
+        current_minute = (start_minute + current_office_clock % 60) % 60
         self.current_timestring = "{:02d}:{:02d}".format(current_hour, current_minute)
 
     @staticmethod
