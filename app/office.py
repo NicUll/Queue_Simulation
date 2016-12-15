@@ -62,17 +62,18 @@ class Office(object):
     def work(self):
         self.clock += 1  # Increment office clock by one
         self.latest_event = 0
+        if not self.open and (len(self.customers) == 0):
+            self.is_working = False
+            self.latest_event = "office_closed"
         if self.clock == self.open_time_in_minutes:
             self.open = False
             self.latest_event = "close_doors"
-        if not self.is_working:
-            self.latest_event = "office_closed"
+
         return self.latest_event
 
     def finish_customer(self):
         """Increase the customer queue index
         i.e. go to next customer."""
         return_customer = self.customers.popleft()  # Remove customer from queue when done
-        if not self.open and (len(self.customers) == 0):
-            self.is_working = False
+
         return return_customer

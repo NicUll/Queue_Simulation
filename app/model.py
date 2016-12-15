@@ -40,16 +40,18 @@ class Model(object):
         # Generate a customer with a change of new_customer_odds e.g. 20% if it is 0.2
         if (random() < self.new_customer_odds) and self.office.open:
             customer = self.office.add_customer()
-            self.event_handler.add_event(Office.office_events["new_customer"].format(customer.id))  # Add
-            if queue_not_empty_before:
+            self.event_handler.add_event(
+                Office.office_events["new_customer"].format(customer.id))  # Add new customer to event-que
+            if queue_not_empty_before:  # Add event of customer getting a que-nr
                 self.event_handler.add_event(Office.office_events["customer_que"].format(self.customers_in_queue + 1),
                                              increase=False)
 
         # Block that handles finishing current customer
         if self.next_out_time == self.office.clock:  # Check if a customer should be done now and
             prev_customer = self.office.finish_customer()  # Remove them from the queue
-            self.event_handler.add_event(Office.office_events["customer_leaves"].format(prev_customer.id))
-            self.next_out_time = None
+            self.event_handler.add_event(
+                Office.office_events["customer_leaves"].format(prev_customer.id))  # Add event of customer finished
+            self.next_out_time = None  # No customer waiting to be done
 
         # Block that handles getting to the next customer
         self.customers_in_queue = len(self.office.customers)  # Update length of queue
@@ -84,11 +86,10 @@ class Model(object):
     @staticmethod
     def minutes_to_m_and_s(minutes):
         minute_string = str(int(minutes)) + "m"
-        second_string = str(int((minutes%1)*60)) + "s"
+        second_string = str(int((minutes % 1) * 60)) + "s"
         return minute_string + " " + second_string
 
-
     def generate_stats(self):
-        avg_que_time = Model.minutes_to_m_and_s(self.office.total_wait_time/self.office.total_customer_amount)
-        self.stats = "STATISTIK: {} kunder, kundeväntetid {} minuter = {} /kund".format(self.office.total_customer_amount, self.office.total_wait_time, avg_que_time)
-
+        avg_que_time = Model.minutes_to_m_and_s(self.office.total_wait_time / self.office.total_customer_amount)
+        self.stats = "STATISTIK: {} kunder, kundeväntetid {} minuter = {} /kund".format(
+            self.office.total_customer_amount, self.office.total_wait_time, avg_que_time)

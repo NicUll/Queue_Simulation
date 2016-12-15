@@ -17,8 +17,8 @@ class Simulation(object):
         self.run = False
 
     def end_simulation(self):
-        self.pause_simulation()
         self.model.generate_stats()
+        self.pause_simulation()
 
     def update_parameters(self):
         """Change the values used to simulate"""
