@@ -12,7 +12,7 @@ class SaveFile(object):
         try:
             with open(self.filename, "r") as file:
                 self.time_per_customer = int(file.readline())
-                self.open_times = file.readline().split(",")
+                self.open_times = file.readline().strip().split(",")
                 self.new_customer_odds = float(file.readline())
         except FileNotFoundError:
             with open(self.filename, "w") as file:

@@ -5,7 +5,6 @@ from tkinter import *
 from app.controller import Controller
 from app.savefile import SaveFile
 
-
 savefile = SaveFile("data.txt")
 model = Model(savefile.open_times, savefile.time_per_customer, savefile.new_customer_odds)
 
@@ -19,9 +18,9 @@ controller.grid(column=1, row=0)
 
 
 def task():
-    root.update_idletasks()
-    root.update()
-    #while model.office.is_working:
+    #root.update_idletasks()
+    #root.update()
+    # while model.office.is_working:
     if simulation.run and model.office.is_working:
         model.step()
         while model.event_handler.has_event:
@@ -35,7 +34,5 @@ root.update()
 root.after(0, task)
 root.mainloop()
 
-
-
-# savefile.save_data(model.office.time_per_customer, model.office.open_time, model.office.close_time,
-# model.new_customer_odds)
+savefile.save_data(model.office.time_per_customer, model.office.open_time, model.office.close_time,
+                   model.new_customer_odds)

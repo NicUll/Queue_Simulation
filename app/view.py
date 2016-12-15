@@ -4,12 +4,12 @@ from app.simulation import Simulation
 
 
 class View(Frame):
-    def __init__(self, master, model):
+    def __init__(self, root, model):
         """The view that displays the GUI and outputs the simulation data."""
-        master.title("Queue simulation")
-        master.geometry = model.x_size + "x" + model.y_size
-        super(View, self).__init__(master)
-        self.master = master
+        root.title("Queue simulation")
+        root.geometry = model.x_size + "x" + model.y_size
+        super(View, self).__init__(root)
+        self.root = root
         self.create_widgets()
 
     def create_widgets(self):
