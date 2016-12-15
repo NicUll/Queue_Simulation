@@ -27,7 +27,7 @@ class Controller(Frame):
         """Method called when clicking the reset button"""
         self.simulation.pause_simulation()
         # Call methods to reset simulation and model to normal state,
-        # they in turn call resets on office
+        # model in turn calls reset on office
         self.simulation.view.reset()
         self.model.reset()
         self.start_button["state"] = "normal"  # Make start button clickable

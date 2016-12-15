@@ -8,20 +8,21 @@ class Model(object):
         """Model object that holds the simulation parameters
         and an office object."""
         self.office = Office(times, time_per_customer)  # Create and store a post-office
-        self.next_out_time = None  # Initialize a field that will keep track of current customers out time
-        self.customers_in_queue = 0  # Total amount of customers that's been handled
         self.new_customer_odds = odds  # The odds of a customer entering the office
-        self.current_timestring = self.office.open_time  # The current time in text format, e.g. 10:58
         self.x_size = x_size
         self.y_size = y_size
         self.event_handler = EventHandler()
+        self.self_reset()
+
+    def self_reset(self):
+        self.customers_in_queue = 0
+        self.next_out_time = None
+        self.current_timestring = self.office.open_time  # The current time in text format, e.g. 10:58
 
     def reset(self):
         self.office.reset()
         self.event_handler.clear_events()
-        self.customers_in_queue = 0
-        self.next_out_time = None
-        self.current_timestring = self.office.open_time  # The current time in text format, e.g. 10:58
+        self.self_reset()
 
     def step(self):
         """Method for stepping through the simulation one step
