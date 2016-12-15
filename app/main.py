@@ -4,7 +4,7 @@ from app.model import Model
 from tkinter import *
 from app.controller import Controller
 from app.savefile import SaveFile
-import sys
+
 
 savefile = SaveFile("data.txt")
 model = Model(savefile.open_times, savefile.time_per_customer, savefile.new_customer_odds)
@@ -21,13 +21,13 @@ controller.grid(column=1, row=0)
 def task():
     root.update_idletasks()
     root.update()
-    while model.office.is_working:
-        if simulation.run:
-            model.step()
-            while model.event_handler.has_event:
-                application.update_text_box("end", "\n" + model.event_handler.get_event())
-        root.update_idletasks()
-        root.update()
+    #while model.office.is_working:
+    if simulation.run and model.office.is_working:
+        model.step()
+        while model.event_handler.has_event:
+            application.update_text_box("end", "\n" + model.event_handler.get_event())
+    root.update_idletasks()
+    root.update()
     root.after(0, task)
 
 

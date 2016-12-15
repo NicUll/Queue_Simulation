@@ -4,7 +4,7 @@ from tkinter import *
 class Controller(Frame):
     def __init__(self, master, simulation, model):
         """The controller in the form of sliders and buttons
-        that changes simulation parameters."""
+        that controls the simulation and changes simulation parameters."""
         super(Controller, self).__init__(master)
         self.master = master
         self.simulation = simulation
@@ -16,9 +16,11 @@ class Controller(Frame):
 
     def start(self):
         self.simulation.start_simulation()
+        self.start_button["state"] = "disabled"
 
     def reset(self):
         self.simulation.pause_simulation()
         self.simulation.view.reset()
         self.model.reset()
+
 
