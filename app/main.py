@@ -21,10 +21,15 @@ def task():
     #root.update_idletasks()
     #root.update()
     # while model.office.is_working:
-    if simulation.run and model.office.is_working:
-        model.step()
-        while model.event_handler.has_event:
-            application.update_text_box("end", "\n" + model.event_handler.get_event())
+    if simulation.run:
+        if model.office.is_working:
+            model.step()
+            while model.event_handler.has_event:
+                application.update_text_box("end", "\n" + model.event_handler.get_event())
+        else:
+            simulation.end_simulation()
+            application.update_text_box("end", "\n\n" + model.stats)
+
     root.update_idletasks()
     root.update()
     root.after(0, task)

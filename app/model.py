@@ -16,6 +16,7 @@ class Model(object):
 
     def self_reset(self):
         """Method used to reset only model-specific variables."""
+        self.stats = "No stats generated"
         self.customers_in_queue = 0
         self.next_out_time = None
         self.current_timestring = self.office.open_time  # The current time in text format, e.g. 10:58
@@ -79,3 +80,15 @@ class Model(object):
         current_hour = start_hour + current_office_clock // 60
         current_minute = start_minute + current_office_clock % 60
         self.current_timestring = "{:02d}:{:02d}".format(current_hour, current_minute)
+
+    @staticmethod
+    def minutes_to_m_and_s(minutes):
+        minute_string = str(int(minutes)) + "m"
+        second_string = str(int((minutes%1)*60)) + "s"
+        return minute_string + " " + second_string
+
+
+    def generate_stats(self):
+        avg_que_time = Model.minutes_to_m_and_s(self.office.total_wait_time/self.office.total_customer_amount)
+        self.stats = "STATISTIK: {} kunder, kundeväntetid {} minuter = {} /kund".format(self.office.total_customer_amount, self.office.total_wait_time, avg_que_time)
+
