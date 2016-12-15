@@ -20,7 +20,7 @@ class Controller(Frame):
         """Method the create the controller objects"""
         self.start_button = Button(self, text="Starta", command=self.start)
         self.start_button.grid(row=0, column=0, columnspan=2,pady="5")
-        self.reset_button = Button(self, text="Återställ", command=self.reset)
+        self.reset_button = Button(self, text="Töm", command=self.reset)
         self.reset_button.grid(row=1, column=0, columnspan=2, pady="5")
         self.times = Label(self, text="Öppettider")
         self.times.grid(row=2,column=0,columnspan=2)
