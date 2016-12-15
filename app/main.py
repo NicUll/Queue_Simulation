@@ -5,31 +5,22 @@ from tkinter import *
 from app.controller import Controller
 from app.savefile import SaveFile
 
-savefile = SaveFile("data.txt")
-model = Model(savefile.open_times, savefile.time_per_customer, savefile.new_customer_odds)
 
-root = Tk()
-application = View(root, model)
-application.grid(column=0, row=0)
-simulation = Simulation(application, model, 5)
+savefile = SaveFile("data.txt")  # Collect simulation parameters
+model = Model(savefile.open_times, savefile.time_per_customer, savefile.new_customer_odds)  # Create model
 
-controller = Controller(root, simulation, model)
-controller.grid(column=1, row=0)
+root = Tk()  # Create the TK window
+view = View(root, model)  # Generate output window
+view.grid(column=0, row=0)  # Place window to the left
+
+simulation = Simulation(view, model, 5)  # Make the object that controls all events
+
+controller = Controller(root, simulation, model, savefile)  # Create the GUI to interact with the simulation
+controller.grid(column=1, row=0)  # Place controllers to the right
 
 
-def task():
-    #root.update_idletasks()
-    #root.update()
-    # while model.office.is_working:
-    if simulation.run:
-        if model.office.is_working:
-            model.step()
-            while model.event_handler.has_event:
-                application.update_text_box("end", "\n" + model.event_handler.get_event())
-        else:
-            simulation.end_simulation()
-            application.update_text_box("end", "\n\n" + model.stats)
-
+def task():  # Function that runs all the time
+    simulation.run_simulation()
     root.update_idletasks()
     root.update()
     root.after(0, task)
@@ -39,5 +30,3 @@ root.update()
 root.after(0, task)
 root.mainloop()
 
-savefile.save_data(model.office.time_per_customer, model.office.open_time, model.office.close_time,
-                   model.new_customer_odds)

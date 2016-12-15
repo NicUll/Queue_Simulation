@@ -20,6 +20,16 @@ class Simulation(object):
         self.model.generate_stats()
         self.pause_simulation()
 
+    def run_simulation(self):
+        if self.run:
+            if self.model.office.is_working:
+                self.model.step()
+                while self.model.event_handler.has_event:
+                    self.view.update_text_box("end", "\n" + self.model.event_handler.get_event())
+            else:
+                self.end_simulation()
+                self.view.update_text_box("end", "\n\n" + self.model.stats)
+
     def update_parameters(self):
         """Change the values used to simulate"""
         pass

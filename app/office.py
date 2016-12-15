@@ -20,7 +20,6 @@ class Office(object):
         together with an index keeping track of current customer."""
         self.open_time = times[0]  # The time the office opens
         self.close_time = times[1]  # The time the office closes
-        self.open_time_in_minutes = self.calculate_open_time()
         self.time_per_customer = time_per_customer  # Time it takes to handle a customer
         self.reset()
 
@@ -32,6 +31,7 @@ class Office(object):
         self.is_working = True
         self.latest_event = 0
         self.total_wait_time = 0
+        self.open_time_in_minutes = self.calculate_open_time()
 
     def calculate_open_time(self):
         open_in_minutes = Office.clock_to_minutes(self.open_time)

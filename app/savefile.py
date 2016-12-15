@@ -3,7 +3,7 @@ class SaveFile(object):
         """An object responsible for handling the savefile"""
         self.filename = filename
         self.time_per_customer = 2
-        self.open_times = ("09:00", "18:00")
+        self.open_times = ["09:00", "18:00"]
         self.new_customer_odds = 0.2
         self.errands_per_customer = None
         self.fetch_data()
@@ -21,6 +21,7 @@ class SaveFile(object):
                                                   self.new_customer_odds))
 
     def save_data(self, time_per_customer, open_time, close_time, new_customer_odds):
+        self.open_times = [open_time, close_time]
         with open(self.filename, "w") as file:
             file.write("{}\n{},{}\n{}".format(time_per_customer, open_time, close_time,
                                               new_customer_odds))

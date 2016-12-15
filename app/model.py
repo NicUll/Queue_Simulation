@@ -21,6 +21,7 @@ class Model(object):
         self.next_out_time = None
         self.current_timestring = self.office.open_time  # The current time in text format, e.g. 10:58
 
+
     def reset(self):
         """Method to reset the whole model and the objects it controls"""
         self.office.reset()
@@ -65,7 +66,6 @@ class Model(object):
             self.event_handler.add_event(event_string, increase=False)
 
         # Call work method on office and check if any events are returned
-
         if self.office.work() != 0:
             self.event_handler.add_event(self.office.office_events[self.office.latest_event])
 
@@ -77,7 +77,7 @@ class Model(object):
         """Method for making the current time into a
         printable string for output"""
         start_hour = int(self.office.open_time[:2])
-        start_minute = int(self.office.close_time[3:])
+        start_minute = int(self.office.open_time[3:])
         current_office_clock = self.office.clock
         current_hour = start_hour + current_office_clock // 60
         current_minute = start_minute + current_office_clock % 60
