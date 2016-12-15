@@ -3,9 +3,15 @@ from _collections import deque
 
 
 class Office(object):
-    office_events = {0: "Inga händelser", 1: "Kontoret stänger dörrarna",
-                     2: "Kontoret har stängt helt för dagen",
-                     3: "Kontoret har blivit rånat"}
+    office_events = {0: "Inga händelser",
+                     "new_customer": "Kund {} kommer in",
+                     "customer_que": "får plats {} i kön",
+                     "customer_leaves": "Kund {} går",
+                     "customer_serviced_after_wait": "kund {} blir betjänad",
+                     "customer_serviced_immediately": "blir genast betjänad",
+                     "close_doors": "Kontoret stänger dörrarna",
+                     "office_closed": "Kontoret har stängt helt för dagen",
+                     "office_robbed": "Kontoret har blivit rånat"}
 
     def __init__(self, times, time_per_customer):
         """Create a post-office object with parameters for
@@ -56,15 +62,15 @@ class Office(object):
         self.latest_event = 0
         if self.clock == self.open_time_in_minutes:
             self.open = False
-            self.latest_event = 1
+            self.latest_event = "close_doors"
         if not self.is_working:
-            self.latest_event = 2
+            self.latest_event = "office_closed"
         return self.latest_event
 
     def finish_customer(self):
         """Increase the customer queue index
         i.e. go to next customer."""
-        return_customer = self.customers.popleft() # Remove customer from queue when done
+        return_customer = self.customers.popleft()  # Remove customer from queue when done
         if not self.open and (len(self.customers) == 0):
             self.is_working = False
         return return_customer
