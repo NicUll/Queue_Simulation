@@ -21,7 +21,6 @@ class Model(object):
         self.next_out_time = None
         self.current_timestring = self.office.open_time  # The current time in text format, e.g. 10:58
 
-
     def reset(self):
         """Method to reset the whole model and the objects it controls"""
         self.office.reset()
@@ -89,7 +88,16 @@ class Model(object):
         second_string = str(int((minutes % 1) * 60)) + "s"
         return minute_string + " " + second_string
 
+    @staticmethod
+    def minutes_to_h_and_m(minutes):
+        hour_string = str(minutes // 60) + "h"
+        minute_string = str(minutes % 60) + "m"
+        return hour_string + " " + minute_string
+
     def generate_stats(self):
         avg_que_time = Model.minutes_to_m_and_s(self.office.total_wait_time / self.office.total_customer_amount)
-        self.stats = "STATISTIK: {} kunder, kundeväntetid {} minuter = {} /kund".format(
-            self.office.total_customer_amount, self.office.total_wait_time, avg_que_time)
+        total_work_time = Model.minutes_to_h_and_m(self.office.total_work_time)
+        avg_work_time = Model.minutes_to_m_and_s(self.office.total_work_time / self.office.total_customer_amount)
+        self.stats = "STATISTIK: \n{} kunder \nKundeväntetid {} minuter, {} /kund \nAktiv arbetstid {}, {} /kund".format(
+            self.office.total_customer_amount, self.office.total_wait_time, avg_que_time, total_work_time,
+            avg_work_time)

@@ -31,6 +31,7 @@ class Office(object):
         self.is_working = True
         self.latest_event = 0
         self.total_wait_time = 0
+        self.total_work_time = 0
         self.open_time_in_minutes = self.calculate_open_time()
 
     def calculate_open_time(self):
@@ -56,6 +57,7 @@ class Office(object):
         """Start helping customer, return end-time"""
         current_customer = self.customers[0]  # Select first customer in the queue
         self.total_wait_time += (self.clock - current_customer.in_time)
+        self.total_work_time += current_customer.errands * self.time_per_customer
         out_time = self.clock + current_customer.errands * self.time_per_customer  # Time customer will leave
         return out_time
 

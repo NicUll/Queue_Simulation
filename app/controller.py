@@ -2,7 +2,6 @@ from tkinter import *
 
 
 class Controller(Frame):
-
     HOURS = ["{:02d}".format(x) for x in range(24)]
     MINUTES = ["{:02d}".format(x) for x in range(60)]
 
@@ -19,13 +18,21 @@ class Controller(Frame):
     def create_widgets(self):
         """Method the create the controller objects"""
         self.start_button = Button(self, text="Starta", command=self.start)
-        self.start_button.grid(row=0, column=0, columnspan=2,pady="5")
+        self.start_button.grid(row=0, column=0, columnspan=2, pady="5")
         self.reset_button = Button(self, text="Töm", command=self.reset)
         self.reset_button.grid(row=1, column=0, columnspan=2, pady="5")
         self.times = Label(self, text="Öppettider")
-        self.times.grid(row=2,column=0,columnspan=2)
+        self.times.grid(row=2, column=0, columnspan=2)
         self.save_button = Button(self, text="Spara", command=self.save)
-        self.save_button.grid(row=5,column=0, columnspan=2)
+        self.save_button.grid(row=5, column=0, columnspan=2)
+
+        self.message = StringVar(self.root)
+        self.message.set("")
+        self.message_box = Label(self, text=self.message.get())
+        self.message_box.grid(row=6, column=0,columnspan=2)
+
+        self.close_button = Button(self, text="Avsluta", command=self.quit)
+        self.close_button.grid(row=7,column=0,columnspan=2, sticky=S)
 
         self.open_hour = StringVar(self.root)
         self.open_hour.set(self.savefile.open_times[0][:2])
@@ -62,11 +69,23 @@ class Controller(Frame):
         self.model.reset()
         self.start_button["state"] = "normal"  # Make start button clickable
 
+    def update_message(self, message):
+        self.message.set(message)
+        self.message_box["text"] = self.message.get()
+
+
     def save(self):
+
+        if (self.open_hour.get() >= self.close_hour.get()):
+            if (self.open_hour.get() > self.close_hour.get()) or (self.open_minute.get() >= self.close_minute.get()):
+                self.update_message("Öppettiden måste \nvara före \nstängning!")
+                return
         open_time = self.open_hour.get() + ":" + self.open_minute.get()
         close_time = self.close_hour.get() + ":" + self.close_minute.get()
         self.model.office.open_time = open_time
         self.model.office.close_time = close_time
 
-        self.savefile.save_data(self.model.office.time_per_customer, self.model.office.open_time, self.model.office.close_time,
-                   self.model.new_customer_odds)
+        self.savefile.save_data(self.model.office.time_per_customer, self.model.office.open_time,
+                                self.model.office.close_time,
+                                self.model.new_customer_odds)
+        self.update_message("Sparat!")
