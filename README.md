@@ -1,9 +1,9 @@
-##DD1316 – Kösimulering
-####Nic Ullman
+## DD1316 – Kösimulering  
+#### Nic Ullman
 
-###Specifikation
+### Specifikation
 
-##Inledning
+## Inledning
 Jag ska göra ett program som simulerar kundhanteringen på ett postkontor. Programmet ska startas från en terminal 
 och sedan öppnas i ett eget fönster med ett grafiskt användargränssnitt. I gränssnittet ska möjligheten finnas att 
 ändra simuleringsparametrar (hastighet, kundfrekvens, antal ärenden, öppettider), pausa, starta och starta om simuleringen. 
@@ -13,7 +13,7 @@ på när personen kan förväntas lämna postkontoret.
 En utmaning blir att presentera datan på ett tydligt sätt och att skriva algoritmer som hanterar de 
 simuleringsparametrar som finns på ett smart sätt.
 
-##Användarscenarier
+## Användarscenarier
 Kalle vill ta reda på hur lång tid han kan förvänta sig att få vänta för att få 3st ärenden klara om han anländer vid 
 postkontoret kl 14:00 - mot slutet av hans lunchrast, detta då han måste var tillbaka på jobber kl 14:10. Han startar programmet och möts av ett fönster med en stor textruta för utdata till vänster, sliders för att ändra simuleringsparametrar samt start- och pausknappar under dessa, till höger. Han väljer att låta simuleringsparametrarna ha kvar sina standardvärden. Kalle är nu enbart intresserad av att veta hur lång tid det skulle ta för honom, och fyller därför i en textruta med sitt antal ärenden och vilket klockslag han tänkte anlända. Därefter klickar han på, "simulera enstaka kund" och får då i textrutan till vänster ut informationen:
 *"Kund som anländer kl 14:00 med 3 ärenden kan förväntas lämna postkontoret kl 14:09"*
@@ -34,7 +34,7 @@ och inte behöver stressa. Däremot så får hon flytta fram tiden från 18:35 -
 till 19:00 för att hinna hem först.
 Hon avslutar sedan programmet genom att klicka på "avsluta".
 
-##Programskelett
+## Programskelett
 ```python
 
 class Office(object):
@@ -110,9 +110,9 @@ class CustomerTime(object):
 
 ```
 
-##Programflöde och dataflöde
+## Programflöde och dataflöde
 
-###Klass - Data
+### Klass - Data
 ```
 Office - Öppettider och tid per kund, lista med aktuella kunder.
 
@@ -129,7 +129,7 @@ Controller - Simulation, model
 
 Savefile - Simuleringsparametrar, referens till sparfilen
 ```
-###Flöde
+### Flöde
 1. Programmet startas
   * En main-funktion startas och;
   * Skapar en tk-inter ruta
